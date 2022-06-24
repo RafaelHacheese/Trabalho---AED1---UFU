@@ -20,11 +20,11 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
             printf("\n [3] Apagar a lista");
             printf("\n [4] Inserir um elemento na lista");
             printf("\n [5] Remover um elemento na lista");
-            printf("\n [6] Imprimir a lista");
-            printf("\n [7] Remove negativos");
-            printf("\n [8] Remove par");
-            printf("\n [9] Intercala listas");
-            printf("\n [10] Verificar o tamanho da lista:");
+            printf("\n [6] Remover todas as cocrrencias do elemento na lista");
+            printf("\n [7] Imprimir a lista");
+            printf("\n [8] Remove pos");
+            printf("\n [9] Verificar o tamanho da lista:");
+            printf("\n [10] Intercala listas");
             printf("\n [11] Sair do sistema");
             printf("\n\n Digite a opcao desejada: ");
             printf("\n\n------------------------------------------\n");
@@ -84,7 +84,7 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
             if (resp == 1){
                 if(esvazia_lista(*l1) == 0){
                     printf("\n Nao foi possivel esvaziar a lista.");
-                    return -1;
+                    break;
             }
             printf("\n A lista foi ESVAZIADA com sucesso!");
             break;
@@ -134,25 +134,25 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
 
         case 4:{ //Inserir elemento na lista
             int n; //Elemento digitado
-            printf("\n Digite o elemento (int) a ser inserido na lista: ");
-            scanf("%d", &n);
+            printf("\n Digite o elemento a palavara a ser inserido na lista: ");
+            scanf("%s", &n);
 
             printf("\n Digite [1] para inserir na lista 1 e [2] para inserir na lista 2: \n");
             scanf("%d", &resp); // resposta da operação
 
             // Tratamentos:
             if (resp == 1){
-                if (inserir_elem(1l,n) == 0)
+                if (insere_ord(l1,n) == 0)
                 printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
             else
-                printf("\n O elemento %d foi incluido com sucesso! ",n);
+                printf("\n O elemento %s foi incluido com sucesso! ",n);
             break;
                 }
                 else if(resp == 2){
-                if (inserir_elem(l2,n) == 0){
+                if (insere_ord(l2,n) == 0){
                     printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
                     }else{
-                        printf("\n O elemento %d foi incluido com sucesso! ",n);
+                        printf("\n O elemento %s foi incluido com sucesso! ",n);
                 }
                         break;
                 }
@@ -164,32 +164,83 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
 
         case 5:{    // Remove um elemento na lista
             int n;
-             printf("\n Digite o elemento (int) a ser excluido na lista: ");
-             scanf("%d", &n);
+             printf("\n Digite o elemento (string) a ser excluido na lista: ");
+             scanf("%s", &n);
 
              printf("\n Digite [1] para remover na lista 1 e [2] para remover na lista 2: \n");
              scanf("%d", &resp);
 
                 if (resp == 1){
                 if(remove_todas(l1,n) == 0){
-                    if(lista_vazia(l1) == 1)
+                    if(lista_vazia(l1) == -1)
+                    {
+                        printf("\n A lista 1 não existe!");
+                    }
+                    else if(lista_vazia == 1){
                         printf("\n A lista 1 ja esta vazia!");
-                    else
-                        printf("\n Nao existe o elemento %d na lista! ",n);
+                    }
+                        printf("\n Nao existe o elemento %s na lista! ",n);
                         }
                 else
-                    printf("\n o elemento %d foi removido com sucesso! ",n);
+                    printf("\n o elemento %s foi removido com sucesso! ",n);
                     break;
                 }
                 else if(resp == 2){
                     if(remove_todas(l2,n) == 0){
-                        if(lista_vazia(l2) == 1)
-                            printf("\n A lista 2 ja esta vazia!");
-                    else
-                        printf("\n Nao existe o elemento %d na lista! ",n);
-            }
+                        if(lista_vazia(l2) == -1)
+                    {
+                        printf("\n A lista 1 não existe!");
+                    }
+                    else if(lista_vazia == 1){
+                        printf("\n A lista 1 ja esta vazia!");
+                    }
+                        printf("\n Nao existe o elemento %s na lista! ",n);
+                        }
             else
-                printf("\n o elemento %d foi removido com sucesso! ",n);
+                printf("\n o elemento %s foi removido com sucesso! ",n);
+                break;
+            }
+            else{
+                printf("\n Opção inválida");
+                break;
+                }
+        }
+        case 6:{    // Remove todas
+            int n;
+             printf("\n Digite o elemento (string) a ser excluido na lista: ");
+             scanf("%s", &n);
+
+             printf("\n Digite [1] para remover na lista 1 e [2] para remover na lista 2: \n");
+             scanf("%d", &resp);
+
+                if (resp == 1){
+                if(remove_todas(l1,n) == 0){
+                    if(lista_vazia(l1) == -1)
+                    {
+                        printf("\n A lista 1 não existe!");
+                    }
+                    else if(lista_vazia == 1){
+                        printf("\n A lista 1 ja esta vazia!");
+                    }
+                        printf("\n Nao existe o elemento %s na lista! ",n);
+                        }
+                else
+                    printf("\n o elemento %s foi removido com sucesso! ",n);
+                    break;
+                }
+                else if(resp == 2){
+                    if(remove_todas(l2,n) == 0){
+                        if(lista_vazia(l2) == -1)
+                    {
+                        printf("\n A lista 1 não existe!");
+                    }
+                    else if(lista_vazia == 1){
+                        printf("\n A lista 1 ja esta vazia!");
+                    }
+                        printf("\n Nao existe o elemento %s na lista! ",n);
+                        }
+            else
+                printf("\n o elemento %s foi removido com sucesso! ",n);
                 break;
             }
             else{
@@ -198,10 +249,9 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
                 }
         }
         /*
-        case 6:{ // Imprime a lista
+        case 7:{ // Imprime a lista
              printf("\n Digite [1] para imprimir a lista 1 e [2] para imprimir a lista 2 e [3] para imprimir ambas as listas: \n");
              scanf("%d", &resp);
-
                 if (resp == 1){
                 imprime_lista(l);// Interface não é feita no TAD.
                 break;
@@ -210,7 +260,6 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
                 imprime_lista(l2);
                 break;
             }
-
             else if (resp == 3){
                 imprime_lista(l);
                 imprime_lista(l2);
@@ -219,19 +268,14 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
                printf("\n Opcao invalida! Tente novamente");
                 break;
             }
-
-
         }*/
         /*
-        case 7:{ // Remove posição
+        case 8:{ // Remove posição
             int pos;
             printf("\n Digite a posição a ser removida: \n");
             scanf("%d", &pos);
             printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
             scanf("%d", &resp);
-
-
-
             if (resp == 1){
                 remove_pos(l,pos);
                 break;
@@ -243,8 +287,8 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
                 break;
         }
         }*/
-        case 8:{ // Tamanho
-            printf("\n Digite [1] para remover pares da lista 1 e [2] para remover pares da lista 2: \n");
+        case 9:{ // Tamanho
+            printf("\n Digite [1] para tamanho da lista 1 e [2] para tamanho da lista 2: \n");
             scanf("%d", &resp);
             int tam;
 
@@ -261,31 +305,12 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
                  break;
                  }
         }
-        /*
-        case 9:{ // Intercala as listas
+
+        case 10:{ // Intercala as listas
            l3 =  intercala_listas(l1,l2);
             imprime_lista(l3);
             break;
         }
-
-        case 10:{
-        int tamanho; // Variavel que receberá o tamanho da lista.
-        printf("\n Digite [1] para verificar o tamanho da lista 1 e [2] para verificar o tamanho da lista 2: \n");
-        scanf("%d", &resp);
-
-                if (resp == 1){
-                tamanho_lista(l1);
-                break;
-                }
-                else if(resp == 2){
-                tamanho_lista(l2);
-                break;
-            }else{
-               printf("\n Opcao invalida! Tente novamente");
-                break;
-            }
-
-        }*/
 
         }
         }while(op != 11);
@@ -302,32 +327,29 @@ Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
 
 /*
 Operação: imprime_lista
-
 - Entrada: Endereço de uma lista
 -  Pré-Condição: Lista existir (Endereço ser valido)
 - Processo: Ao percorrer a lista, apresentamos sua informação na aplicação.
 - Saída: Por se tratar de um retorno VOID, a saida não existe.
 - Pós-condição: Sem pós-condição.
-
 */
-/*
+
 void imprime_lista(Lista l){
     if(lista_vazia(l) == 1){
         printf("\n Lista VAZIA! ");
         return;
     }
-
     printf("\n\n\n \t LISTA: ");
     printf("\n\t {");
     int i;
     for(i=1;;i++){ //Não sei quantos elementos tem na lista
         int n; // N representa o elemento presente na lista
-        if(getPos(l,i,&n) == 0){ //Não existe a posição
+        if(n = getPos(l,i) == 0){ //Não existe a posição
             break;
         }
-        printf(" %d ",n);
-
+        printf(" %s ",n);
     }
     printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
 }
-*/
+
+
