@@ -20,7 +20,9 @@ Lista cria_lista(){
 }
 
 int lista_vazia(Lista lst){
-	if(lst == NULL || lst->fim == 0)
+	if(lst == NULL)
+        return -1;
+    if(lst->fim == 0)
 		return 1;
 	else
 		return 0;
@@ -28,20 +30,11 @@ int lista_vazia(Lista lst){
 
 int lista_cheia(Lista lst){
 	if(lst->fim == MAX1)
-		return 1;
+		return -1;
 	else
 		return 0;
 }
 
-int inserir_elem(Lista lst, char str[]){
-	if(lst == NULL || lista_cheia(lst))
-		return 0;
-
-	strcpy(lst->arrStr[ lst->fim ], str);
-	lst->fim ++;
-
-	return 1;
-}
 
 int insere_ord(Lista lst, char string[]){
 	if(lst == NULL || lista_cheia(lst))
@@ -138,12 +131,10 @@ int remove_todas(Lista lst, char elem[]){
 	int idx = 0;
 	while( idx < lst->fim && strcmp(str, lst->arrStr[ idx ]) )
 		idx ++;
-
 	if(idx == lst->fim)
 		return 0;
 	// idx == pos da str que quero remover
 	for(int i = idx; i < (lst->fim)-1; i++)
 		strcpy(lst->arrStr[i], lst->arrStr[i+1]);
-
 	lst->fim --;*/
 }
